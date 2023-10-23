@@ -5,19 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.sce.dao.MemberDao;
 
-public class MidConfirmService implements Service {
+public class MemailConfirmService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		// mide
-		String mid = request.getParameter("mid");
+		String memail = request.getParameter("memail");
 		MemberDao mDao = MemberDao.getInstance();
-		int result = mDao.midConfirm(mid);
+		int result = mDao.memailConfirm(memail);
 		if (result == MemberDao.EXISTENT) {
-			request.setAttribute("confirmResult", "<b>중복된 ID입니다</b>");
+			request.setAttribute("memailConfirmResult", "<b>사용 불가한 중복된 메일</b>");
 		} else {
-			request.setAttribute("confirmResult", "사용가능한id입니다");
+			request.setAttribute("memailConfirmResult", "사용 가능한 메일");
 		}
 	}
 

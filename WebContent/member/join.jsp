@@ -9,6 +9,11 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<style>
+	#content_form {
+		height:580px; 
+	}
+	</style>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -91,7 +96,7 @@ $(document).ready(function() {
 				$('#mpw').focus();
 				return false;
 			}
-			return false;
+			
 		});
 	});
 </script>
@@ -117,7 +122,7 @@ $(document).ready(function() {
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content_form">
-		<form action="${conPath }/join.do" method="post" enctype="multipart/form-data">
+		<form action="${conPath }/join.do" method="post">
 			<table>
 				<caption>회원가입</caption>
 				<tr>
@@ -150,15 +155,23 @@ $(document).ready(function() {
 					</td>
 				</tr>
 				<tr>
-					<th>사진</th>
-					<td><input type="file" name="mphoto"></td>
+					<th>전화번호</th>
+					<td><input type="text" name="mtel" id="mtel" class="mtel" required="required"></td>
 				</tr>
+				
 				<tr>
 					<th>생년월일</th><td><input type="text" name="mbirth" id="datepicker" class="mbirth" autocomplete="off"></td>
 				</tr>
 				<tr>
 					<th>주소</th><td><input type="text" name="maddress"></td>
 				</tr>
+				<tr>
+	                <td>성별</td>
+	                <td>
+	                    <input type="radio" name="mgender" value="m" checked="checked"/>남자
+	                    <input type="radio" name="mgender" value="f" />여자
+	                </td>
+           		</tr>
 				<tr>
 					<td colspan="2">
 						<p>
@@ -170,6 +183,6 @@ $(document).ready(function() {
 			</table>
 		</form>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
+<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

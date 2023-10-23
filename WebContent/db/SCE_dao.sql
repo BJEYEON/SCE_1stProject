@@ -30,22 +30,25 @@ ROLLBACK;
 -----------------  BoardDao에 들어갈 query --------------------
 --------------------------------------------------------------
 -- (1) 글목록(startRow~endRow)
-SELECT ROWNUM RN, A.*
-    FROM (SELECT * FROM BOARD ORDER BY BDATE DESC) A;
-SELECT * 
-    FROM (SELECT ROWNUM RN, A.*
-        FROM (SELECT * FROM BOARD ORDER BY BDATE DESC) A)
-    WHERE RN BETWEEN 7 AND 12;
+SELECT B.*, MNAME FROM BOARD B, MVC_MEMBER M
+  WHERE B.MID=M.MID 
+  ORDER BY BGROUP DESC, BSTEP; -- 출력 기준
+SELECT * FROM
+  (SELECT ROWNUM RN, A.* FROM (SELECT B.*, MNAME FROM BOARD B, MEMBER M
+                              WHERE B.MID=M.MID 
+                              ORDER BY BGROUP DESC, BSTEP) A)
+  WHERE RN BETWEEN 1 AND 7; -- dao에 쓸 query
 -- (2) 글갯수
 SELECT COUNT(*) CNT FROM BOARD;
 -- (3) 글쓰기(원글쓰기)
 SELECT * FROM BOARD;
-INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BPW, BIMAGE, BHIT, BGROUP, BSTEP, BINDENT, BIP)
-    VALUES (BOARD_SEQ.NEXTVAL, 'go', '제목', '내용', '1', 'a.docs', 0, BOARD_SEQ.CURRVAL, 0, 0, '192.267.5.4');
+INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BIMAGE, BHIT, BGROUP, BSTEP, BINDENT, BIP)
+    VALUES (BOARD_SEQ.NEXTVAL, 'go', '제목', '내용', 'a.docs', 0, BOARD_SEQ.CURRVAL, 0, 0, '192.267.5.4');
 -- (4) hit 1회 올리기
 UPDATE BOARD SET BHIT = BHIT+1 WHERE BNUM='1';
 -- (5) 글번호(Bid)로 글전체 내용(BoardDto) 가져오기
-SELECT * FROM BOARD WHERE BNUM=1;
+SELECT B.*, MNAME
+  FROM BOARD B, MEMBER M WHERE B.MID=M.MID AND BNUM=1;
 -- (6) 글 수정하기(Bid, Btitle, Bcontent, BIMAGE, Bdate(SYSDATE), Bip 수정)
 UPDATE BOARD
     SET BTITLE = '바꾼제목',
@@ -71,14 +74,15 @@ UPDATE BOARD SET BSTEP = BSTEP +1
     WHERE BGROUP=1 AND BSTEP>0;
 -- (9) 답변글 쓰기
 SELECT * FROM BOARD;
-INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BPW, BIMAGE, BGROUP, BSTEP, BINDENT, BIP)
-  VALUES (BOARD_SEQ.NEXTVAL, 'go', '제목', '내용', '1', 'a.docs', 1, 0, 0, '192.267.5.4');
+INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BIMAGE, BGROUP, BSTEP, BINDENT, BIP)
+  VALUES (BOARD_SEQ.NEXTVAL, 'go', '제목', '내용', 'a.docs', 1, 0, 0, '192.267.5.4');
 -- (10) 회원탈퇴시 탈퇴하는 회원(mid)이 쓴 글 모두 삭제하기
 DELETE FROM BOARD WHERE MID='go';
 --------------------------------------------------------------
 -----------------  AdminDao에 들어갈 query --------------------
 --------------------------------------------------------------
 -- (1) admin 로그인
+SELECT * FROM ADMIN;
 SELECT * FROM ADMIN WHERE AID='admin' and APW='1';
 -- (2) 로그인 후 세션에 넣을 용도 : admin aid로 dto 가져오기
 SELECT * FROM ADMIN WHERE AId='admin';

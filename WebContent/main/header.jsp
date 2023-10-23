@@ -61,8 +61,8 @@ header .gnb ul li{
 }
 header a{
     justify-content: space-between;
-    padding: 0.75rem 0;
-    width: 100%;
+    width: 100px;
+	height: 100px;
     align-items: center;
     cursor: pointer;
     display: flex;
@@ -118,7 +118,7 @@ header a{
 			<ul>
 				<li><a>${admin.aname }님 ▶</a></li>
 				<li><a href="${conPath }/boardList.do">후기게시판</a></li>
-				<li><a href="${conPath }/logout.do">관리자모드나가기</a></li>
+				<li><a href="${conPath }/logout.do">관리자모드 나가기</a></li>
 				<li><a href="${conPath }/applyList.do">시승신청목록</a></li>
 					
 			</ul>

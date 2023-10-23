@@ -37,10 +37,11 @@ public class BoardDao {
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
-		String sql = "SELECT * " + 
-				"    FROM (SELECT ROWNUM RN, A.*" + 
-				"        FROM (SELECT * FROM BOARD ORDER BY BDATE DESC) A)" + 
-				"    WHERE RN BETWEEN ? AND ?";
+		String sql = "SELECT * FROM\r\n" + 
+				"  (SELECT ROWNUM RN, A.* FROM (SELECT B.*, MNAME FROM BOARD B, MEMBER M\r\n" + 
+				"                              WHERE B.MID=M.MID \r\n" + 
+				"                              ORDER BY BGROUP DESC, BSTEP) A)\r\n" + 
+				"  WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -53,7 +54,6 @@ public class BoardDao {
 				String mname    = rs.getString("mname");
 				String btitle   = rs.getString("btitle");
 				String bcontent = rs.getString("bcontent");
-				String bpw		= rs.getString("bpw");
 				Timestamp bdate= rs.getTimestamp("bdate");
 				String bimage	= rs.getString("bimage");
 				int    bhit     = rs.getInt("bhit");
@@ -61,7 +61,7 @@ public class BoardDao {
 				int    bstep    = rs.getInt("bstep");
 				int    bindent  = rs.getInt("bindent");
 				String bip      = rs.getString("bip");
-				dtos.add(new BoardDto(bnum, mid, btitle, bcontent, bpw, bdate, bimage, bhit, bgroup, bstep, bindent, bip));
+				dtos.add(new BoardDto(bnum, mid, mname, btitle, bcontent, bdate, bimage, bhit, bgroup, bstep, bindent, bip));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -107,17 +107,16 @@ public class BoardDao {
 		int result = FAIL;
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BPW, BIMAGE, BHIT, BGROUP, BSTEP, BINDENT, BIP)" + 
-				"    VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, ?, 0, BOARD_SEQ.CURRVAL, 0, 0, ?)";
+		String sql = "INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BIMAGE, BHIT, BGROUP, BSTEP, BINDENT, BIP)" + 
+				"    VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, 0, BOARD_SEQ.CURRVAL, 0, 0, ?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getMid());
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
-			pstmt.setString(4, dto.getBpw());
-			pstmt.setString(5, dto.getBimage());
-			pstmt.setString(6, dto.getBip());
+			pstmt.setString(4, dto.getBimage());
+			pstmt.setString(5, dto.getBip());
 			pstmt.executeUpdate();
 			result = SUCCESS;
 			System.out.println("원글쓰기 성공");
@@ -160,7 +159,8 @@ public class BoardDao {
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
-		String sql = "SELECT * FROM BOARD WHERE BNUM=?";
+		String sql = "SELECT B.*, MNAME" + 
+				"  FROM BOARD B, MEMBER M WHERE B.MID=M.MID AND BNUM=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -171,7 +171,6 @@ public class BoardDao {
 				String mname = rs.getString("mname");
 				String btitle = rs.getString("btitle");
 				String bcontent = rs.getString("bcontent");
-				String bpw = rs.getString("bpw");
 				Timestamp bdate = rs.getTimestamp("bdate");
 				String bimage = rs.getString("bimage");
 				int    bhit = rs.getInt("bhit");
@@ -179,7 +178,7 @@ public class BoardDao {
 				int    bstep= rs.getInt("bstep");
 				int    bindent= rs.getInt("bindent");
 				String bip = rs.getString("bip");
-				dto = new BoardDto(bnum, mid, btitle, bcontent, bpw, bdate, bimage, bhit, bgroup, bstep, bindent, bip);
+				dto = new BoardDto(bnum, mid, mname, btitle, bcontent, bdate, bimage, bhit, bgroup, bstep, bindent, bip);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -315,15 +314,14 @@ public class BoardDao {
 		preReplyBoardStep(dto.getBgroup(), dto.getBstep());
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BPW, BIMAGE, BGROUP, BSTEP, BINDENT, BIP)" + 
-				"  VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BIMAGE, BGROUP, BSTEP, BINDENT, BIP)" + 
+				"  VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getMid());
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
-			pstmt.setString(3, dto.getBpw());
 			pstmt.setString(4, dto.getBimage());
 			pstmt.setInt(5, dto.getBgroup());
 			pstmt.setInt(6, dto.getBstep() + 1);

@@ -83,19 +83,14 @@
 	</c:if>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content_form">
-		<form action="${conPath }/modify.do" method="post" enctype="multipart/form-data">
+		<form action="${conPath }/modify.do" method="post" >
 			<input type="hidden" name="dbMpw" value="${member.mpw }">
-			<input type="hidden" name="dbMphoto" value="${member.mphoto }">
 			<table>
 				<caption>정보수정</caption>
 				<tr>
 					<th>아이디</th>
 					<td>
 						<input type="text" name="mid" value="${member.mid }" readonly="readonly" size="3">
-					</td>
-					<td rowspan="4">
-						<img src="${conPath }/memberPhotoUp/${member.mphoto}"
-								 alt="${member.mname }사진">
 					</td>
 				</tr>
 				<tr>
@@ -122,11 +117,10 @@
 					</td>
 				</tr>
 				<tr>
-					<th>사진</th>
-					<td colspan="2">
-						<input type="file" name="mphoto">
-					</td>
+					<th>전화번호</th>
+					<td><input type="text" name="mtel" id="mtel" class="mtel" required="required"></td>
 				</tr>
+				
 				<tr>
 					<th>생년월일</th>
 					<td colspan="2">
@@ -140,6 +134,13 @@
 						<input type="text" name="maddress" value="${member.maddress }">
 					</td>
 				</tr>
+				<tr>
+	                <td>성별</td>
+	                <td>
+	                    <input type="radio" name="mgender" value="m" checked="checked"/>남자
+	                    <input type="radio" name="mgender" value="f" />여자
+	                </td>
+           		</tr>
 				<tr>
 					<td colspan="3">
 						<input type="submit" value="정보수정" class="btn">
