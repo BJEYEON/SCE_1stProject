@@ -37,7 +37,7 @@ public class BoardDao {
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
-		String sql = "SELECT * FROM\r\n" + 
+		String sql = "SELECT * FROM" + 
 				"  (SELECT ROWNUM RN, A.* FROM (SELECT B.*, MNAME FROM BOARD B, MEMBER M\r\n" + 
 				"                              WHERE B.MID=M.MID \r\n" + 
 				"                              ORDER BY BGROUP DESC, BSTEP) A)\r\n" + 
@@ -315,7 +315,7 @@ public class BoardDao {
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO BOARD (BNUM, MID, BTITLE, BCONTENT, BIMAGE, BGROUP, BSTEP, BINDENT, BIP)" + 
-				"  VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				"  VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);

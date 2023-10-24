@@ -33,15 +33,20 @@ public class TestCarApplyDao {
 		}
 	}
 	// (1) 시승신청 목록
-	public ArrayList<TestCarApplyDto> applyList(){
+	public ArrayList<TestCarApplyDto> applyList(int startRow, int endRow){
 		ArrayList<TestCarApplyDto> lists = new ArrayList<TestCarApplyDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM TESTCARAPPLY ORDER BY TNUM";
+		String sql = "SELECT * " + 
+				"    FROM (SELECT ROWNUM RN, A.*" + 
+				"        FROM (SELECT T.*, CNAME FROM TESTCARAPPLY T, CAR C WHERE T.CNUM=C.CNUM ORDER BY TNUM DESC) A)  " + 
+				"    WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int tnum          = rs.getInt("tnum");
@@ -53,7 +58,8 @@ public class TestCarApplyDao {
 				String thall    = rs.getString("thall");
 				String tselmind    = rs.getString("tselmind");
 				String temail    = rs.getString("temail");
-				lists.add(new TestCarApplyDto(tnum, cnum, tname, ttel, tgender, tarea, thall, tselmind, temail));
+				String cname = rs.getString("cname");
+				lists.add(new TestCarApplyDto(tnum, cnum, tname, ttel, tgender, tarea, thall, tselmind, temail, cname));
 			}
 			
 		} catch (SQLException e) {

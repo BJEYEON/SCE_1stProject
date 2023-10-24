@@ -10,9 +10,10 @@ public class TestCarApplyDto {
 	private String thall;
 	private String tselmind;
 	private String temail;
+	private String cname;
 	public TestCarApplyDto() {}
 	public TestCarApplyDto(int tnum, int cnum, String tname, String ttel, String tgender, String tarea, String thall,
-			String tselmind, String temail) {
+			String tselmind, String temail, String cname) {
 		super();
 		this.tnum = tnum;
 		this.cnum = cnum;
@@ -23,6 +24,7 @@ public class TestCarApplyDto {
 		this.thall = thall;
 		this.tselmind = tselmind;
 		this.temail = temail;
+		this.cname = cname;
 	}
 	public int getTnum() {
 		return tnum;
@@ -78,10 +80,16 @@ public class TestCarApplyDto {
 	public void setTemail(String temail) {
 		this.temail = temail;
 	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 	@Override
 	public String toString() {
 		return "TestCarApplyDto [tnum=" + tnum + ", cnum=" + cnum + ", tname=" + tname + ", ttel=" + ttel + ", tgender="
 				+ tgender + ", tarea=" + tarea + ", thall=" + thall + ", tselmind=" + tselmind + ", temail=" + temail
-				+ "]";
+				+ ", cname=" + cname + "]";
 	}
 }

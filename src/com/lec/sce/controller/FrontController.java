@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lec.sce.service.ALoginService;
+import com.lec.sce.service.ApplyListService;
 import com.lec.sce.service.BoardContentService;
+import com.lec.sce.service.BoardDeleteService;
 import com.lec.sce.service.BoardListService;
 import com.lec.sce.service.BoardModifyService;
 import com.lec.sce.service.BoardModifyViewService;
+import com.lec.sce.service.BoardReplyService;
+import com.lec.sce.service.BoardReplyViewService;
 import com.lec.sce.service.BoardWriteService;
 import com.lec.sce.service.MLoginService;
 import com.lec.sce.service.MLogoutService;
@@ -22,6 +26,7 @@ import com.lec.sce.service.MemailConfirmService;
 import com.lec.sce.service.MidConfirmService;
 import com.lec.sce.service.MjoinService;
 import com.lec.sce.service.Service;
+import com.lec.sce.service.TestCarAppService;
 import com.lec.sce.service.MWithdrawalService;
 
 @WebServlet("*.do")
@@ -33,6 +38,7 @@ public class FrontController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		actionDo(request, response);
 	}
 
@@ -114,6 +120,32 @@ public class FrontController extends HttpServlet {
 			service = new BoardModifyService();
 			service.execute(request, response);
 			viewPage = "boardList.do";
+		}else if(command.equals("/boardDelete.do")) {
+			service = new BoardDeleteService();
+			service.execute(request, response);
+			viewPage = "boardList.do";
+		}else if(command.equals("/boardReplyView.do")) {
+			service = new BoardReplyViewService();
+			service.execute(request, response);
+			viewPage = "board/boardReply.jsp";
+		}else if(command.equals("/boardReply.do")) {
+			service = new BoardReplyService();
+			service.execute(request, response);
+			viewPage = "boardList.do";
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * 
+		 * * * * * * * * 시승신청 목록  * * * * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/applyList.do")) {
+			service = new ApplyListService();
+			service.execute(request, response);
+			viewPage = "admin/applyList.jsp";
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * 
+		 * * * * * * * * 시승신청  * * * * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/testCarApp.do")) {
+			service = new TestCarAppService();
+			service.execute(request, response);
+			viewPage = "apply/testCar.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

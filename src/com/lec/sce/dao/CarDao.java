@@ -31,7 +31,7 @@ public class CarDao {
 		}
 	}
 	// (1) 차량목록
-	public ArrayList<CarDto> CarList(){
+	public ArrayList<CarDto> carList(){
 		ArrayList<CarDto> lists = new ArrayList<CarDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;

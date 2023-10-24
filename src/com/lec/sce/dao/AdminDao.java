@@ -71,8 +71,9 @@ public class AdminDao {
 				admin.setAid(rs.getString("aid"));
 				admin.setApw(rs.getString("apw"));
 				admin.setAname(rs.getString("aname"));
-				admin.setAname(rs.getString("atel"));
-			}			
+				admin.setAtel(rs.getString("atel"));
+			}
+			System.out.println("로그인 한 관리자 : "+admin);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}finally {

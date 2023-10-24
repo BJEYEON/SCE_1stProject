@@ -37,6 +37,17 @@ header .logo_img{
 			location.href = '${conPath}/${next}';
 		</script>
 	</c:if>
+	<c:if test="${not empty adminLoginResult }">
+		<script>
+			alert('${adminLoginResult}');
+		</script>
+	</c:if>
+	<c:if test="${not empty adminLoginErrorMsg }">
+		<script>
+			alert('${adminLoginErrorMsg}');
+			history.back();
+		</script>
+	</c:if>
 	<c:if test="${not empty loginErrorMsg }">
 		<script>
 			alert('${loginErrorMsg}');
@@ -50,7 +61,7 @@ header .logo_img{
 	</c:if>
 	<div id="content_form">
 	<jsp:include page="../main/header.jsp"/>
-		main
+		&nbsp;
 	</div>
 	<div>
 		<h2 class="text">지금 바로 Lamborghini를 경험해보세요.</h2>
