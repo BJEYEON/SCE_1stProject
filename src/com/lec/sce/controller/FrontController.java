@@ -27,6 +27,7 @@ import com.lec.sce.service.MidConfirmService;
 import com.lec.sce.service.MjoinService;
 import com.lec.sce.service.Service;
 import com.lec.sce.service.TestCarAppService;
+import com.lec.sce.service.TestCarAppServiceView;
 import com.lec.sce.service.MWithdrawalService;
 
 @WebServlet("*.do")
@@ -142,6 +143,10 @@ public class FrontController extends HttpServlet {
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * 
 		 * * * * * * * * 시승신청  * * * * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/testCarAppView.do")) {
+			service = new TestCarAppServiceView();
+			service.execute(request, response);
+			viewPage = "apply/testCar.jsp";
 		}else if(command.equals("/testCarApp.do")) {
 			service = new TestCarAppService();
 			service.execute(request, response);

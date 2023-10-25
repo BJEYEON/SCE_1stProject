@@ -105,7 +105,7 @@ header a{
 				<li><a href="${conPath }/logout.do">로그아웃</a></li>
 				<li><a href="${conPath }/searchCar.do">차량검색</a></li>
 				<li><a href="${conPath }/boardList.do">차량후기</a></li>
-				<li><a href="${conPath }/testCarApp.do">시승신청</a></li>
+				<li><a href="${conPath }/testCarAppView.do">시승신청</a></li>
 			</ul>
 		</div>
 	</nav>
