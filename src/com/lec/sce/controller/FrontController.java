@@ -25,6 +25,7 @@ import com.lec.sce.service.MModifyService;
 import com.lec.sce.service.MemailConfirmService;
 import com.lec.sce.service.MidConfirmService;
 import com.lec.sce.service.MjoinService;
+import com.lec.sce.service.SearchCarService;
 import com.lec.sce.service.Service;
 import com.lec.sce.service.TestCarAppService;
 import com.lec.sce.service.TestCarAppServiceView;
@@ -150,7 +151,14 @@ public class FrontController extends HttpServlet {
 		}else if(command.equals("/testCarApp.do")) {
 			service = new TestCarAppService();
 			service.execute(request, response);
-			viewPage = "apply/testCar.jsp";
+			viewPage = "testCarAppView.do";
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * 
+		 * * * * * * * * 시승신청  * * * * * * * * * *
+		 * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		}else if(command.equals("/searchCar.do")) {
+			service = new SearchCarService();
+			service.execute(request, response);
+			viewPage = "carList/searchCar.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

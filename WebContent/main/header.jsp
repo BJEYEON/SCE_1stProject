@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
 /*****폰트설정*****/
 @font-face {
@@ -75,7 +78,40 @@ header a{
     text-decoration: none;
     color: black;
 }
+.container li:last-child{
+  position: relative;
+  display: none;
+}
+.container li:last-child .searchbox {
+  width: 200px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.container li:last-child .searchimg {
+  position : absolute;
+  width: 17px;
+  top: 43px;
+  left: 190px;
+  margin: 0;
+}
+
+
+
 </style>
+<script>
+	$(function(){
+		$('.fsearch').click(function(){
+			$('.container li:last-child').css('display', 'block');
+		});
+		$('.searchimg').click(function(){
+			location.href = "${conPath}/searchCar.do?cname=" + $('input[name="searchbox"]').val(); //   이거 값 받아서 searchCar.do여기로 넘기기--> <input type="text" name="searchbox" class="searchbox" placeholder="검색어 입력">
+		});
+	});
+</script>
+
 </head>
 <body>
 <header>
@@ -86,9 +122,15 @@ header a{
 		</div>
 		<div class="gnb">
 			<ul>
-				<li><a href="${conPath }/searchCar.do">차량검색</a></li>
 				<li><a href="${conPath }/joinView.do">회원가입</a></li>
 				<li><a href="${conPath }/loginView.do">로그인</a></li>
+				<li class="fsearch"><a href="#">차량검색</a></li>
+				<li>
+					<a>
+					<input type="text" name="searchbox" class="searchbox" placeholder="검색어 입력">
+					<img class="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="검색">
+					</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -103,9 +145,15 @@ header a{
 				<li><a>${member.mname }님 </a></li>
 				<li><a href="${conPath }/modifyView.do">정보수정</a></li>
 				<li><a href="${conPath }/logout.do">로그아웃</a></li>
-				<li><a href="${conPath }/searchCar.do">차량검색</a></li>
 				<li><a href="${conPath }/boardList.do">차량후기</a></li>
 				<li><a href="${conPath }/testCarAppView.do">시승신청</a></li>
+				<li class="fsearch"><a href="#">차량검색</a></li>
+				<li>
+					<a>
+					<input type="text" name="searchbox" class="searchbox" placeholder="검색어 입력">
+					<img class="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="검색">
+					</a>
+				</li>
 			</ul>
 		</div>
 	</nav>

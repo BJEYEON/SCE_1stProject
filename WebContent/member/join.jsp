@@ -120,6 +120,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+	
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content_form">
 		<form action="${conPath }/join.do" method="post">

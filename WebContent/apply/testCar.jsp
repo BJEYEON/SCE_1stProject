@@ -83,6 +83,18 @@ div{
 </script>
 </head>
 <body>
+<c:if test="${not empty applyResult }">
+		<script>
+			alert('${applyResult}');
+		</script>
+	</c:if>
+	
+	<c:if test="${not empty applyErrorMsg }">
+		<script>
+			alert('${applyErrorMsg}');
+			history.back();
+		</script>
+	</c:if>
 <jsp:include page="../main/header.jsp"/>
 <div class="subscribe">
 	<form class="form" name="form" action="${conPath }/testCarApp.do" method="post">
@@ -90,7 +102,7 @@ div{
 		<div class="category">
 			<ul class="row category">
 				<c:forEach items="${carList }" var="list">
-					<li class="item" id="${list.cimage }" data="${list.cnum }">
+					<li class="item" id="${list.cimage }" data="${list.cnum }"> <!-- var="list" -->
 						<span class="categoryName">${list.cname }</span>
 					</li>
 				</c:forEach>
@@ -101,7 +113,7 @@ div{
 			<div class="param">필수 입력 정보</div>
 		</div>
 			<div class="th">
-				<input type="text" name="carname">
+				<input type="hidden" name="carname">
 			</div>
 			<div class="tr">이름</div>
 				<div class="td">

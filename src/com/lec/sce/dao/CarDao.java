@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import com.lec.sce.dto.BoardDto;
 import com.lec.sce.dto.CarDto;
+import com.lec.sce.dto.TestCarApplyDto;
 
 public class CarDao {
 	private DataSource ds;
@@ -95,20 +96,20 @@ public class CarDao {
 	}
 		
 	// (3) 차량상세정보
-	public CarDto getCar(int cnum) {
+	public CarDto getCar(String cname) {
 		CarDto dto = null;
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
-		String sql = "SELECT * FROM CAR WHERE CNUM=?";
+		String sql = "SELECT * FROM CAR WHERE CNAME=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cnum);
+			pstmt.setString(1, cname);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				//String cnum = rs.getString("cnum");
-				String cname = rs.getString("cname");
+				int cnum = rs.getInt("cnum");
+				//String cname = rs.getString("cname");
 				String coil = rs.getString("coil");
 				String cengine = rs.getString("cengine");
 				String ctrance = rs.getString("ctrance");
@@ -131,4 +132,43 @@ public class CarDao {
 		}
 		return dto;
 	}
+	// (3) 차량상세정보
+//	public ArrayList<CarDto> carList(String cname){
+//		ArrayList<CarDto> lists = new ArrayList<CarDto>();
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		String sql = "SELECT * FROM CAR WHERE CNAME=?";
+//		try {
+//			conn = ds.getConnection();
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, cname);
+//			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				int tnum          = rs.getInt("tnum");
+//				int cnum          = rs.getInt("cnum");
+//				String tname    = rs.getString("tname");
+//				String ttel    = rs.getString("ttel");
+//				String tgender    = rs.getString("tgender");
+//				String tarea    = rs.getString("tarea");
+//				String thall    = rs.getString("thall");
+//				String tselmind    = rs.getString("tselmind");
+//				String temail    = rs.getString("temail");
+//				String cname = rs.getString("cname");
+//				lists.add(new TestCarApplyDto(tnum, cnum, tname, ttel, tgender, tarea, thall, tselmind, temail, cname));
+//			}
+//			
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		} finally {
+//			try {
+//				if(rs !=null) rs.close();
+//				if(pstmt!=null) pstmt.close();
+//				if(conn !=null) conn.close();
+//			} catch (SQLException e) {
+//				System.out.println(e.getMessage());
+//			}
+//		}
+//		return lists;
+//	}
 }
