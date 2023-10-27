@@ -29,6 +29,8 @@ header .container{
     display: flex;
     height: 68px;
     position: relative;
+    width: 1100px;
+    margin: 0 auto;
 }
 header .logo_img{
     height: 50px;
@@ -36,7 +38,7 @@ header .logo_img{
     overflow: clip;
     border-style: none;
     /*margin-top:250px;*/
-    margin-left:100px;
+    /*margin-left:100px;*/
 }
 header .gnb {
 	height: 90px;
@@ -78,12 +80,12 @@ header a{
     text-decoration: none;
     color: black;
 }
-.container li:last-child{
+.container li:last-child.search{
   position: relative;
   display: none;
 }
-.container li:last-child .searchbox {
-  width: 200px;
+.container li:last-child.search .searchbox {
+  width: 180px;
   border: 1px solid #bbb;
   border-radius: 8px;
   padding: 10px 12px;
@@ -94,7 +96,7 @@ header a{
   position : absolute;
   width: 17px;
   top: 43px;
-  left: 190px;
+  left: 180px;
   margin: 0;
 }
 
@@ -104,7 +106,7 @@ header a{
 <script>
 	$(function(){
 		$('.fsearch').click(function(){
-			$('.container li:last-child').css('display', 'block');
+			$('.container li:last-child.search').css('display', 'block');
 		});
 		$('.searchimg').click(function(){
 			location.href = "${conPath}/searchCar.do?cname=" + $('input[name="searchbox"]').val(); //   이거 값 받아서 searchCar.do여기로 넘기기--> <input type="text" name="searchbox" class="searchbox" placeholder="검색어 입력">
@@ -125,7 +127,7 @@ header a{
 				<li><a href="${conPath }/joinView.do">회원가입</a></li>
 				<li><a href="${conPath }/loginView.do">로그인</a></li>
 				<li class="fsearch"><a href="#">차량검색</a></li>
-				<li>
+				<li class="search">
 					<a>
 					<input type="text" name="searchbox" class="searchbox" placeholder="검색어 입력">
 					<img class="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="검색">
@@ -148,7 +150,7 @@ header a{
 				<li><a href="${conPath }/boardList.do">차량후기</a></li>
 				<li><a href="${conPath }/testCarAppView.do">시승신청</a></li>
 				<li class="fsearch"><a href="#">차량검색</a></li>
-				<li>
+				<li class="search">
 					<a>
 					<input type="text" name="searchbox" class="searchbox" placeholder="검색어 입력">
 					<img class="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" alt="검색">
@@ -169,7 +171,6 @@ header a{
 				<li><a href="${conPath }/boardList.do">후기게시판</a></li>
 				<li><a href="${conPath }/logout.do">관리자모드 나가기</a></li>
 				<li><a href="${conPath }/applyList.do">시승신청목록</a></li>
-					
 			</ul>
 		</div>
 	</nav>

@@ -30,6 +30,17 @@ header .logo_img{
     margin-top:250px;
 }
 </style>
+<c:if test="${not empty modifyResult }">
+<script>
+	alert('{modifyResult}');
+</script>
+</c:if>
+<c:if test="${not empty modifyErrorMsg }">
+<script>
+	alert('{modifyErrorMsg}');
+	history.back();
+</script>
+</c:if>
 </head>
 <body>
 <c:if test="${not empty next }">

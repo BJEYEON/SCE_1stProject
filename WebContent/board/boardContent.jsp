@@ -9,13 +9,57 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${conPath}/css/style.css" rel="stylesheet">
-	<style>
-		#content_form {
-			height:450px;
-			margin: 50px auto 0px;
-		}
-	</style>
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<style>
+#content_form {
+	width: 600px;
+	height: 450px;
+	margin: 100px auto 0px;
+	width: 600px;
+	margin: 20px auto;
+	background-color: #f8f8f8;
+	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#content_form input:not(.btn), #content_form textarea {
+	width: 90%;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 5px 0;
+}
+
+#content_form .gender-label {
+	text-align: center;
+	margin: 10px;
+}
+
+#content_form .gender-label label {
+	margin-right: 5px;
+	width: 20px;
+}
+
+#content_form .gender-input {
+	display: flex;
+	align-items: center;
+}
+
+#content_form .gender-input input {
+	margin: 0 5px;
+}
+
+#content_form .btn {
+	background-color: #e74c3c; /* 배경색 변경 */
+	color: #fff; /* 글자색 변경 */
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px; /* 여백 조정 */
+	font-size: 16px;
+	cursor: pointer;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
 		$(document).ready(function(){
 			
@@ -45,17 +89,17 @@
 			<tr>
 				<td colspan="2">
 					<c:if test="${member.mid eq board.mid }">
-				 		<button onclick="location='${conPath}/boardModifyView.do?bnum=${board.bnum }&pageNum=${param.pageNum }'">수정</button>
+				 		<button class="btn" onclick="location='${conPath}/boardModifyView.do?bnum=${board.bnum }&pageNum=${param.pageNum }'">수정</button>
 				 	</c:if>
 				 	<c:if test="${member.mid eq board.mid or not empty admin}">
-						<button onclick="location='${conPath}/boardDelete.do?bgroup=${board.bgroup }&bstep=${board.bstep }&bindent=${board.bindent }&pageNum=${param.pageNum }'">삭제</button>
+						<button class="btn" onclick="location='${conPath}/boardDelete.do?bgroup=${board.bgroup }&bstep=${board.bstep }&bindent=${board.bindent }&pageNum=${param.pageNum }'">삭제</button>
 			 		</c:if>
 				 	<c:if test="${not empty member }">
-				 		<button onclick="location='${conPath}/boardReplyView.do?bnum=${board.bnum }&pageNum=${param.pageNum }'">답변</button>
+				 		<button class="btn" onclick="location='${conPath}/boardReplyView.do?bnum=${board.bnum }&pageNum=${param.pageNum }'">답변</button>
 				 	</c:if>
-				 	<button onclick="location='${conPath}/boardList.do?pageNum=${param.pageNum }'">목록</button>
+				 	<button class="btn" onclick="location='${conPath}/boardList.do?pageNum=${param.pageNum }'">목록</button>
 		</table>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
+<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

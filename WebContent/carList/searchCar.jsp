@@ -40,6 +40,9 @@
       	width: 200px;
       	height: 20px;
       }
+      h2{
+      	text-align: center
+      }
 </style>
 </head>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -48,6 +51,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div id="jb-container">
+	<c:if test="${not empty carList }">
       <div id="jb-header">
         <h1>${carList.cname }</h1>
       </div>
@@ -68,6 +72,10 @@
         <p></p>
       </div>
     </div>
+   </c:if>
+   <c:if test="${empty carList }">
+   		<h2>해당차량 정보가 없습니다.</h2>
+   </c:if>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

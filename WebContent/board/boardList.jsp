@@ -9,14 +9,68 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${conPath}/css/style.css" rel="stylesheet">
-	<style>
-		#content_form {
-			height:470px;
-			margin: 30px auto 0px;
-		}
-		#content_form table tr { height: 10px;}
-	</style>
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<style>
+#content_form {
+	height: 600px;
+	margin: 30px auto 0px;
+	width: 70%;
+	margin: 20px auto;
+}
+
+#content_form table tr {
+	height: 10px;
+}
+
+/* 테이블 스타일 */
+#content_form table {
+	width: 90%;
+	margin-top: 20px;
+}
+
+#content_form table th {
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 10px;
+}
+
+#content_form table td, #content_form table th {
+	padding: 10px;
+}
+
+#content_form table tr {
+	height: 40px;
+}
+
+#content_form table tr:hover {
+	background-color: #f0f0f0;
+	cursor: pointer;
+}
+
+/* 게시물 제목 스타일 (링크로 변경) */
+#content_form table td.left a {
+	text-decoration: none;
+	color: #333;
+}
+
+/* 페이지 번호 스타일 */
+#content_form .paging {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#content_form .paging a, #content_form .paging b {
+	text-decoration: none;
+	color: #333;
+	margin: 0 5px;
+}
+
+#content_form .paging a:hover {
+	background-color: #333;
+	color: #fff;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('tr').click(function(){
@@ -88,6 +142,6 @@
 			</c:if>
 		</div>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
+<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

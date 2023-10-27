@@ -9,12 +9,60 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<style>
-		#content_form {
-				height:400px; 
-				margin: 20px auto 80px;
-		}
-	</style>
+<style>
+#content_form {
+	height: 400px;
+	margin: 20px auto 80px;
+	width: 700px;
+	height: auto;
+	margin: 20px auto;
+	background-color: #f8f8f8;
+	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#content_form input:not(.btn), #content_form textarea {
+	width: 90%;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 5px 0;
+}
+
+#content_form .gender-label {
+	text-align: center;
+	margin: 10px;
+}
+
+#content_form .gender-label label {
+	margin-right: 5px;
+	width: 20px;
+}
+
+#content_form .gender-input {
+	display: flex;
+	align-items: center;
+}
+
+#content_form .gender-input input {
+	margin: 0 5px;
+}
+
+#content_form .btn {
+	background-color: #e74c3c; /* 배경색 변경 */
+	color: #fff; /* 글자색 변경 */
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px; /* 여백 조정 */
+	font-size: 16px;
+	cursor: pointer;
+}
+
+label {
+	width: 20px;
+}
+</style>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -78,6 +126,7 @@
   </script>
 </head>
 <body>
+
 	<c:if test="${empty member }">
 		<script>location.href='${conPath}/loginView.do?next=modifyView.do';</script>
 	</c:if>
@@ -135,12 +184,14 @@
 					</td>
 				</tr>
 				<tr>
-	                <td>성별</td>
-	                <td>
-	                    <input type="radio" name="mgender" value="m" checked="checked"/>남자
-	                    <input type="radio" name="mgender" value="f" />여자
-	                </td>
-           		</tr>
+				    <th class="gender-label">성별</th>
+				    <td class="gender-input">
+				        <label for="male">남자</label>
+				        <input type="radio" name="mgender" id="male" value="m" checked="checked">
+				        <label for="female">여자</label>
+				        <input type="radio" name="mgender" id="female" value="f">
+				    </td>
+				</tr>
 				<tr>
 					<td colspan="3">
 						<input type="submit" value="정보수정" class="btn">

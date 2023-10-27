@@ -9,12 +9,13 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath}/css/style.css" rel="stylesheet" type="text/css">
-	<style>
-		#content_form {
-			height:370px;
-			margin: 130px auto 0px;
-		}
-	</style>
+ <style>
+	#content_form {
+		height:370px;
+		margin: 130px auto 0px;
+	}
+</style>
+	
 </head>
 <body>
 	<c:if test="${not empty joinResult }">
