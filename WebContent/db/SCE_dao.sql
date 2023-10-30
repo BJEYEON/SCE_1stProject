@@ -20,7 +20,7 @@ UPDATE MEMBER SET mPw = '1',
                     mBirth = '1991/12/12',
                     mGENDER = '남',
                     mAddress = '서울'
-        WHERE mId='jimin';
+        WHERE mId='gayun';
 COMMIT;
 -- (7) 회원탈퇴
 DELETE FROM MEMBER WHERE MID='카리나2';
@@ -115,7 +115,7 @@ SELECT * FROM CAR ORDER BY CNUM;
 -- (2) 차량대수 
 SELECT COUNT(*) CNT FROM CAR;
 -- (3) 차량 상세정보
-SELECT * FROM CAR WHERE LOWER(CNAME)='우루스s';
+SELECT * FROM CAR WHERE CNAME=UPPER('우루스s');
 
 
 commit;

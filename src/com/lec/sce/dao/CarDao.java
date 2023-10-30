@@ -101,7 +101,7 @@ public class CarDao {
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
 		ResultSet         rs    = null;
-		String sql = "SELECT * FROM CAR WHERE LOWER(CNAME)=?";
+		String sql = "SELECT * FROM CAR WHERE CNAME=UPPER(?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);

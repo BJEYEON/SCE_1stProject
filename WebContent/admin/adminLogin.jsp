@@ -25,7 +25,7 @@
 	</c:if>
 	<c:if test="${not empty member }">
 		<script>
-			alert('사용자 주제에 떼끼');
+			alert('사용자는 관리자 모드로 접근할 수 없습니다.');
 			history.back();
 		</script>
 	</c:if>

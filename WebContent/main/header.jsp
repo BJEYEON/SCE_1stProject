@@ -85,7 +85,7 @@ header a{
   display: none;
 }
 .container li:last-child.search .searchbox {
-  width: 180px;
+  width: 190px;
   border: 1px solid #bbb;
   border-radius: 8px;
   padding: 10px 12px;

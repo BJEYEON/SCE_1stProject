@@ -153,7 +153,7 @@ public class FrontController extends HttpServlet {
 			service.execute(request, response);
 			viewPage = "testCarAppView.do";
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * 
-		 * * * * * * * * 시승신청  * * * * * * * * * *
+		 * * * * * * * * 차량검색  * * * * * * * * * *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		}else if(command.equals("/searchCar.do")) {
 			service = new SearchCarService();
