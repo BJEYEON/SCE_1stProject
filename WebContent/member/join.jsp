@@ -188,7 +188,7 @@ $(document).ready(function() {
 					<td><input type="password" name="mpw" id="mpw" class="mpw" required="required"></td>
 				</tr>
 				<tr>
-					<th>비밀번호</th>
+					<th>비밀번호 확인</th>
 					<td>
 						<input type="password" name="mpwChk" id="mpwChk" class="mpwChk" required="required">
 						<div id="mpwChkResult"> &nbsp; </div>
